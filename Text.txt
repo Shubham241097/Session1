@@ -1,0 +1,41 @@
+1] Program.cs
+
+	- The Program class is the entry point of the application.
+	- The Main method is the starting point of the application. 
+	  It accepts command-line arguments (args) and is responsible for creating and running the application host.
+	- The WebApplication.CreateBuilder(args) method creates an instance of WebApplication using the provided command-line arguments. 
+	  This method is used to create the application host builder.
+	- The builder object is then used to configure services and build the application host.
+	- builder.Services.AddRazorPages() registers Razor Pages services in the dependency injection container.
+	  Razor Pages is a feature of ASP.NET Core that allows developers to build web pages using a combination of HTML and C#.
+	- builder.Services.AddScoped<IProductService, ProductService>() adds a scoped dependency injection service. 
+	  It registers the IProductService interface with the ProductService implementation, 
+	  allowing the application to resolve IProductService instances when needed.
+	- builder.Build() builds the application host based on the provided configurations and services.
+	- The HTTP request pipeline. It checks if the application environment is not in development mode using app.Environment.IsDevelopment(). 
+	  If it's not in development mode, the pipeline configures an exception handler and sets up HTTPS redirection and static file serving.
+	- app.UseHttpsRedirection() sets up middleware to automatically redirect HTTP requests to HTTPS if the request is not already HTTPS.
+	- app.UseStaticFiles() enables serving static files such as CSS, JavaScript, and images from the wwwroot folder.
+	- app.UseRouting() sets up routing middleware, which is responsible for matching incoming requests to the appropriate endpoint.
+	- app.UseAuthorization() adds middleware for authorization. 
+	  This middleware is typically used to protect certain endpoints or resources based on user roles or policies.
+	- app.MapRazorPages() configures routing for Razor Pages, allowing the application to handle requests for Razor Pages.
+	- app.MapControllerRoute() sets up routing for controller actions. 
+	  It defines a default route pattern that maps to the ProductController and its actions.
+	- app.Run() starts the application and runs the request pipeline to handle incoming HTTP requests.
+
+2] AppSetting.json
+	The appsettings.json file is a configuration file used in ASP.NET Core applications to store various settings and configurations 
+	for the application. It follows a JSON (JavaScript Object Notation) format and provides a structured way to store key-value pairs.
+
+3] Environments
+	Environments refer to different deployment or runtime environments where an application can be executed. 
+	Each environment represents a specific configuration, set of resources, and conditions under which the application operates.
+	The use of different environments allows developers to customize the application's behavior and settings based on the deployment scenario, 
+	such as development, staging, and production.
+
+4] MiddleWare
+	MiddleWare is a Software layer that sits between the web server and your application's request/response pipeline. 
+	It plays a crucial role in processing HTTP requests and generating HTTP responses.
+	Middleware components are executed sequentially, forming a pipeline, and each component can choose to process the request, 
+	modify the response, or pass the request to the next component in the pipeline.
